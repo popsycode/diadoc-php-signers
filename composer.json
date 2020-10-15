@@ -1,5 +1,5 @@
 {
-    "name": "agentsib/diadoc-php-signers",
+    "name": "popsycode/diadoc-php-signers",
     "description": "Signers for diadoc-php",
     "type": "library",
     "license": "MIT",
