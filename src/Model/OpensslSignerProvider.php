@@ -8,6 +8,7 @@ namespace AgentSIB\Diadoc\Model;
 
 use AgentSIB\Diadoc\Exception\SignerProviderException;
 use Symfony\Component\Process\Exception\RuntimeException;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 
 class OpensslSignerProvider implements SignerProviderInterface
@@ -27,9 +28,12 @@ class OpensslSignerProvider implements SignerProviderInterface
 
     private function getOpensslProcess(array $args = [], $input = null)
     {
-        return ProcessBuilder::create($args)
-            ->setPrefix($this->opensslBin)
-            ->setInput($input)->getProcess();
+
+        $args = array_merge([$this->opensslBin], $args);
+        $process = new Process($args);
+        $process->setInput($input);
+        return $process;
+
     }
 
     /**
